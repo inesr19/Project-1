@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Spider</title>
+
+    <!-- Compiled and minified Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+            
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="row header-container">
+            <h1>Welcome to Music Spider</h1>
+    <!--Header/Nav Goes here (do we need a Nav?)-->
+        </div>
+        <div class="content-container">
+            <div class="row" id="searchBarDiv">
+                <input class="lyricSearchBar" type="text" placeholder="lyrics here">
+                <button class="lyricSearchBtn">Search</button>
+            </div>
+            <div class="row results">
+                <div class="col s4 artistInfo">Song/Artist Name/Artwork here?</div>
+                <div class="col s4 lyrics">Lyrics go here</div>
+                <div class="col s4 recommendedArtists">Recommended artists go here</div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <script>
+        // Move to seperate JS file later
+        
+        //JQuery Element Variables
+
+        const searchedLyrics = $('.lyricSearchBar').text;
+        const lyricSearchBtn = $('.lyricSearchBtn');
+        const artistInfoDiv = $('.artistInfo')
+        const lyricsDiv = $('.lyrics')
+        const recommendedArtistsDiv = $('.recommendedArtists')
+
+    </script>
+
+    
+    
+</body>
+</html>
