@@ -1,0 +1,16 @@
+body {
+    padding: 10%;
+    background-color: gainsboro;
+}
+
+.header-container {
+    text-align: center;
+}
+
+#searchBarDiv {
+    padding: 2%;
+    box-shadow: 0 0 5px;
+    border-radius: 5px;
+    background-color: white;
+}
+
