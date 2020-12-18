@@ -11,7 +11,7 @@ const artistInput = "Anderson-Paak";
 const apiKey = "395206-Hayley-2B98EPSV"
 const queryURL = "https://tastedive.com/api/similar";
 
-  
+
 $(".lyricSearchBtn").click(function(){
     const searchedLyrics = $('.lyricSearchBar').val();
     // replace user input spaces with dash so that TaseDive can read name properly
@@ -45,7 +45,7 @@ $(".lyricSearchBtn").click(function(){
 
         // probably should end up doing this in a for loop
         // append names of similar artists
-        $(".recommendedArtists").html("<br/>" + response.Similar.Results[0].Name + "<br/>" + response.Similar.Results[1].Name + "<br/>" + response.Similar.Results[2].Name);
+        $(".recommendedArtists").html("<br/>" + response.Similar.Results[0].Name + "<br/>" + response.Similar.Results[1].Name + "<br/>" + response.Similar.Results[2].Name); 
 
         // create link element, currently set to 2 item in array
         // var thelink = $("<a>",{
@@ -53,6 +53,21 @@ $(".lyricSearchBtn").click(function(){
         // href: response.Similar.Results[1].yUrl
         // }).appendTo("body");
         // $("body").append(response.Similar.Results[0]);
+        });
+
+        const settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://shazam.p.rapidapi.com/search?term=Can't%20trust%20no%20one%2C%20can't%20even%20trust%20yourself%20yeah&locale=en-US&offset=0&limit=5",
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-key": "908b7a298emsh26a4313bfcc5dd1p11e1dbjsn03ef870d77d7",
+                "x-rapidapi-host": "shazam.p.rapidapi.com"
+            }
+        };
+        
+        $.ajax(settings).done(function (response) {
+            console.log(response);
         });
 
 })
