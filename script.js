@@ -65,3 +65,29 @@ function saveSearchedArtist (artist) {
     savedArtists.push(artist);
     window.localStorage.setItem('artists', JSON.stringify(savedArtists));
 }
+
+
+
+
+
+
+
+
+let testArtistObject = {
+    artist: 'Kanye West',
+    poster: './assets/images/kanyeTestImage.jpeg',
+    song: 'Power',
+    lyrics: 'https://www.shazam.com/track/52699656/power'
+    
+}
+
+function createArtistBio (artistObject) {
+    let artist = $('<div>').text(artistObject.artist);
+    let poster = $('<img>').attr('src', artistObject.poster);
+    let song = $('<div>').text(artistObject.song);
+    let lyrics = $('<a>').attr('href', artistObject.lyrics).text('Click for lyrics');
+    artistInfoDiv.append(artist).append(poster);
+    lyricsDiv.append(song).append(lyrics);
+}
+
+createArtistBio(testArtistObject);
