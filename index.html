@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,15 +13,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- Link CSS file -->
-    <link rel="stylesheet" href="./style.css"/>
-            
+    <link rel="stylesheet" href="./style.css" />
+
 </head>
+
 <body>
 
     <div class="wrapper">
         <div class="row header-container">
             <h1>Welcome to Music Spider</h1>
-    <!--Header/Nav Goes here (do we need a Nav?)-->
+            <!--Header/Nav Goes here (do we need a Nav?)-->
         </div>
         <div class="content-container">
             <div class="row" id="searchBarDiv">
@@ -28,9 +30,19 @@
                 <button class="lyricSearchBtn">Search</button>
             </div>
             <div class="row results">
-                <div class="col s4 artistInfo">Artist Name/Artwork here?</div>
-                <div class="col s4 lyrics">Song/Lyrics go here</div>
-                <div class="col s4 recommendedArtists">Recommended artists go here</div>
+                <div class="col s4">
+                    <h5>Artist</h5>
+                    <div class="col s4 artistInfo"></div>
+                </div>
+                <div class="col s4">
+                    <h5>Song & Lyrics</h5>
+                    <div class="col s4 lyrics"></div>
+                </div>
+                <div class="col s4">
+                    <h5>Similar Artists</h5>
+                    <div class="col s4 recommendedArtists"></div>
+                </div>
+
 
             </div>
 
@@ -42,4 +54,5 @@
     <script src="./script.js"></script>
 
 </body>
+
 </html>

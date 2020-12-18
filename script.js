@@ -6,7 +6,7 @@ const lyricsDiv = $('.lyrics')
 const recommendedArtistsDiv = $('.recommendedArtists')
 
 
-cd 
+// cd 
 const artistInput = "Anderson-Paak";
 const apiKey = "395206-Hayley-2B98EPSV"
 const queryURL = "https://tastedive.com/api/similar";
