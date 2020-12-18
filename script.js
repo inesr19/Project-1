@@ -6,7 +6,7 @@ const lyricsDiv = $('.lyrics')
 const recommendedArtistsDiv = $('.recommendedArtists')
 
 
-cd 
+
 const artistInput = "Anderson-Paak";
 const apiKey = "395206-Hayley-2B98EPSV"
 const queryURL = "https://tastedive.com/api/similar";
@@ -14,6 +14,7 @@ const queryURL = "https://tastedive.com/api/similar";
   
 $(".lyricSearchBtn").click(function(){
     const searchedLyrics = $('.lyricSearchBar').val();
+    saveSearchedArtist(searchedLyrics);
     // replace user input spaces with dash so that TaseDive can read name properly
     const modSearchLyrics = searchedLyrics.replace(" ", "-");
     console.log(modSearchLyrics)
@@ -56,3 +57,7 @@ $(".lyricSearchBtn").click(function(){
         });
 
 })
+
+function saveSearchedArtist (searchedLyrics) {
+    window.localStorage.setItem('artists', searchedLyrics);
+}
