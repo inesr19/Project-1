@@ -11,9 +11,13 @@ const artistInput = "Anderson-Paak";
 const apiKey = "395206-Hayley-2B98EPSV"
 const queryURL = "https://tastedive.com/api/similar";
 
+// localstorage variables
+let savedArtists = []
+
   
 $(".lyricSearchBtn").click(function(){
     const searchedLyrics = $('.lyricSearchBar').val();
+    //saveSearchedArtist(searchedLyrics);
     // replace user input spaces with dash so that TaseDive can read name properly
     const modSearchLyrics = searchedLyrics.replace(" ", "-");
     console.log(modSearchLyrics)
@@ -56,3 +60,34 @@ $(".lyricSearchBtn").click(function(){
         });
 
 })
+
+function saveSearchedArtist (artist) {
+    savedArtists.push(artist);
+    window.localStorage.setItem('artists', JSON.stringify(savedArtists));
+}
+
+
+
+
+
+
+
+
+let testArtistObject = {
+    artist: 'Kanye West',
+    poster: './assets/images/kanyeTestImage.jpeg',
+    song: 'Power',
+    lyrics: 'https://www.shazam.com/track/52699656/power'
+    
+}
+
+function createArtistBio (artistObject) {
+    let artist = $('<div>').text(artistObject.artist);
+    let poster = $('<img>').attr('src', artistObject.poster);
+    let song = $('<div>').text(artistObject.song);
+    let lyrics = $('<a>').attr('href', artistObject.lyrics).text('Click for lyrics');
+    artistInfoDiv.append(artist).append(poster);
+    lyricsDiv.append(song).append(lyrics);
+}
+
+createArtistBio(testArtistObject);
