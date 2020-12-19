@@ -30,6 +30,17 @@ $(".lyricSearchBtn").click(function(){
     // code here will be executed once we get response from Shazam
     const artistName = response.tracks.hits[0].track.subtitle;
     const modArtist = artistName.replace(" ", "-");
+    const songName = response.tracks.hits[0].track.title
+    const songLyrics = response.tracks.hits[0].track.url
+    const songArt = response.tracks.hits[0].track.images.background
+    let artistObject = {
+        artist : artistName,
+        song : songName,
+        lyrics : songLyrics,
+        poster : songArt
+    }
+    createArtistBio(artistObject);
+    console.log(artistObject);
     handleTasteDive(modArtist);
 
     });
@@ -74,6 +85,8 @@ let testArtistObject = {
 }
 
 function createArtistBio (artistObject) {
+    artistInfoDiv.empty();
+    lyricsDiv.empty();
     let artist = $('<div>').text(artistObject.artist);
     let poster = $('<img>').attr('src', artistObject.poster);
     let song = $('<div>').text(artistObject.song);
@@ -84,10 +97,9 @@ function createArtistBio (artistObject) {
 
 //createArtistBio(testArtistObject);
 
-const artistName = response.tracks.hits[0].track.subtitle;
-const songName = response.tracks.hits[0].track.title
-console.log("this is artist: ", artistName);
-console.log("this is name: ", songName);
+
+//console.log("this is artist: ", artistName);
+//console.log("this is name: ", songName);
 
 
 
