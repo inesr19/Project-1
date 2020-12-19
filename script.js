@@ -61,7 +61,24 @@ function handleTasteDive (modArtist) {
         },
         }).then(function(response) {
         // code here will be executed after tastedive
+        const totalSimArtists = 3
         console.log(response);
+        
+        
+
+        for (var i = 0; i < totalSimArtists; i++){
+            let youtubeLink = response.Similar.Results[i].yUrl
+            const tasteDiveResults = (response.Similar.Results[i].Name);
+            let hrefAttr = $('<a>').attr('href', youtubeLink).text(tasteDiveResults);
+            let listAttr = $("<li>").append(hrefAttr);
+            
+            console.log("this is taste dive result: ", tasteDiveResults)
+            $(".similarArtists").append(listAttr);
+            console.log("td response: ", youtubeLink)
+            
+        }
+
+        // $(recommendedArtistsDiv).html(response.Similar.Results[0].Name + "<br/>" + response.Similar.Results[1].Name + "<br/>" + response.Similar.Results[2].Name); 
         });
 }
 
@@ -84,10 +101,10 @@ function createArtistBio (artistObject) {
 
 //createArtistBio(testArtistObject);
 
-const artistName = response.tracks.hits[0].track.subtitle;
-const songName = response.tracks.hits[0].track.title
-console.log("this is artist: ", artistName);
-console.log("this is name: ", songName);
+// const artistName = response.tracks.hits[0].track.subtitle;
+// const songName = response.tracks.hits[0].track.title
+// console.log("this is artist: ", artistName);
+// console.log("this is name: ", songName);
 
 
 
