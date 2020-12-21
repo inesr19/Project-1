@@ -14,6 +14,7 @@ let savedArtists = []
 $(".lyricSearchBtn").click(function(){
     
     
+    
     const searchedLyrics = $('.lyricSearchBar').val();
     $.ajax({
         "async": true,
@@ -73,7 +74,7 @@ function handleTasteDive (modArtist) {
         }).then(function(response) {
         // set total similar artist to 3 for displaying only 3 artists, can adjust for fewer or more
         const totalSimArtists = 3;
-        
+        // recommendedArtistsDiv.empty();
         // for each similar artist, add a list item
         for (var i = 0; i < totalSimArtists; i++){
             // youtube link with response ID to form html link
@@ -89,8 +90,8 @@ function handleTasteDive (modArtist) {
             $(".similarArtists").append(listAttr);
 
             // console.log("this is taste dive result: ", tasteDiveResults)
-            // console.log("td response: ", youtubeLink)
-            // console.log("tastdive object: ", response)
+            console.log("td response: ", youtubeLink)
+            console.log("tastdive object: ", response)
             
         }
 
