@@ -71,25 +71,29 @@ function handleTasteDive (modArtist) {
             info: 1, // to include a return of youtube links
         },
         }).then(function(response) {
-        // code here will be executed after tastedive
-        const totalSimArtists = 3
-        console.log(response);
+        // set total similar artist to 3 for displaying only 3 artists, can adjust for fewer or more
+        const totalSimArtists = 3;
         
-        
-
+        // for each similar artist, add a list item
         for (var i = 0; i < totalSimArtists; i++){
-            let youtubeLink = response.Similar.Results[i].yUrl
+            // youtube link with response ID to form html link
+            let youtubeLink = "https://www.youtube.com/watch?v=" + response.Similar.Results[i].yID
+            // name of similar artist
             const tasteDiveResults = (response.Similar.Results[i].Name);
+            // hyper link to youtube with name of artist as hyperlink
             let hrefAttr = $('<a>').attr('href', youtubeLink).text(tasteDiveResults);
+            // create list element with hyperlink as content
             let listAttr = $("<li>").append(hrefAttr);
-            
-            console.log("this is taste dive result: ", tasteDiveResults)
+
+            // append the hyperlink to the ul 
             $(".similarArtists").append(listAttr);
-            console.log("td response: ", youtubeLink)
+
+            // console.log("this is taste dive result: ", tasteDiveResults)
+            // console.log("td response: ", youtubeLink)
+            // console.log("tastdive object: ", response)
             
         }
 
-        // $(recommendedArtistsDiv).html(response.Similar.Results[0].Name + "<br/>" + response.Similar.Results[1].Name + "<br/>" + response.Similar.Results[2].Name); 
         });
 }
 
