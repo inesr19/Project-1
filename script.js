@@ -7,14 +7,21 @@ const recommendedArtistsDiv = $('.recommendedArtists')
 const apiKey = "395206-Hayley-2B98EPSV"
 const queryURL = "https://tastedive.com/api/similar";
 
+//modal test vars
+
+const modal = $('#modal1');
+
 // localstorage variables
 let savedArtists = []
 
-
-$(".lyricSearchBtn").click(function () {
-
-
-
+$(document).ready(function() {
+    $('#modal1').modal();
+});
+  
+$(".lyricSearchBtn").click(function(){
+    
+    
+    
     const searchedLyrics = $('.lyricSearchBar').val();
     $.ajax({
         "async": true,
@@ -26,30 +33,33 @@ $(".lyricSearchBtn").click(function () {
             "x-rapidapi-host": "shazam.p.rapidapi.com"
         }
     }).done(function (response) {
-        console.log(response);
-        // second ajax call here
-        // code here will be executed once we get response from Shazam
-        const artistName = response.tracks.hits[0].track.subtitle;
-        const modArtist = artistName.replace(" ", "-");
-        const songName = response.tracks.hits[0].track.title
-        const songLyrics = response.tracks.hits[0].track.url
-        const songArt = response.tracks.hits[0].track.images.background
-        let artistObject = {
-            artist: artistName,
-            song: songName,
-            lyrics: songLyrics,
-            poster: songArt
-        }
-        createArtistBio(artistObject);
-        console.log(artistObject);
-        handleTasteDive(modArtist);
-
-    });
+    console.log(response);
+    if ($.isEmptyObject(response)){
+        console.log('oops!');
+        $('#modal1').modal('open');
+        return
+    };
+    // second ajax call here
+    // code here will be executed once we get response from Shazam
+    const artistName = response.tracks.hits[0].track.subtitle;
+    const modArtist = artistName.replace(" ", "-");
+    const songName = response.tracks.hits[0].track.title
+    const songLyrics = response.tracks.hits[0].track.url
+    const songArt = response.tracks.hits[0].track.images.background
+    let artistObject = {
+        artist : artistName,
+        song : songName,
+        lyrics : songLyrics,
+        poster : songArt
+    }
+    createArtistBio(artistObject);
+    console.log(artistObject);
+    handleTasteDive(modArtist);
 
 
     //saveSearchedArtist(searchedLyrics);
     console.log("we're in the function");
-
+    })
 })
 
 function saveSearchedArtist(artist) {
@@ -138,5 +148,4 @@ function createArtistBio(artistObject) {
 //console.log("this is artist: ", artistName);
 //console.log("this is name: ", songName);
 
-
-
+//.fail(function(error){console.log('somethings wrong')})
