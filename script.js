@@ -1,12 +1,12 @@
 //JQuery Element Variables
 
 const lyricSearchBtn = $('.lyricSearchBtn');
-const artistInfoDiv = $('.artistInfo')
-const lyricsDiv = $('.lyrics')
-const recommendedArtistsDiv = $('.recommendedArtists')
-const apiKey = "395206-Hayley-2B98EPSV"
+const artistInfoDiv = $('.artistInfo');
+const lyricsDiv = $('.lyrics');
+const recommendedArtistsDiv = $('.recommendedArtists');
+const apiKey = "395206-Hayley-2B98EPSV";
 const queryURL = "https://tastedive.com/api/similar";
-
+const similarArtistsDiv = $('.similarArtists');
 //modal test vars
 
 const modal = $('#modal1');
@@ -15,13 +15,13 @@ const modal = $('#modal1');
 let savedArtists = []
 
 $(document).ready(function() {
-    $('#modal1').modal();
+    modal.modal();
 });
   
-$(".lyricSearchBtn").click(function(){
-    
-    
-    
+lyricSearchBtn.click(handleShazam)
+
+
+function handleShazam () {
     const searchedLyrics = $('.lyricSearchBar').val();
     $.ajax({
         "async": true,
@@ -29,19 +29,19 @@ $(".lyricSearchBtn").click(function(){
         "url": "https://shazam.p.rapidapi.com/search?term=" + searchedLyrics + "&locale=en-US&offset=0&limit=5",
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "908b7a298emsh26a4313bfcc5dd1p11e1dbjsn03ef870d77d7",
+            "x-rapidapi-key": "1c9a023ed1msh7f6737bed07a8e3p126d31jsnfd7845cb0d56",
             "x-rapidapi-host": "shazam.p.rapidapi.com"
         }
     }).done(function (response) {
     console.log(response);
     if ($.isEmptyObject(response)){
         console.log('oops!');
-        $('#modal1').modal('open');
+        modal.modal('open');
+        artistInfoDiv.empty();
+        lyricsDiv.empty();
+        similarArtistsDiv.empty();
         return
     };
-    // second ajax call here
-    // code here will be executed once we get response from Shazam
-    console.log("this is shazam: ", response);
     const artistName = response.tracks.hits[0].track.subtitle;
     const modArtist = artistName.replace(" ", "-") && artistName.replace("Feat.", "feat");
     const songName = response.tracks.hits[0].track.title
@@ -56,13 +56,8 @@ $(".lyricSearchBtn").click(function(){
     createArtistBio(artistObject);
     console.log(artistObject);
     handleTasteDive(modArtist);
-
-
-    //saveSearchedArtist(searchedLyrics);
-    console.log("we're in the function");
     })
-
-})
+}
 
 
 function saveSearchedArtist(artist) {
@@ -118,14 +113,6 @@ function handleTasteDive (modArtist) {
 
 
     });
-
-}
-
-let testArtistObject = {
-    artist: 'Kanye West',
-    poster: './assets/images/kanyeTestImage.jpeg',
-    song: 'Power',
-    lyrics: 'https://www.shazam.com/track/52699656/power'
 
 }
 
