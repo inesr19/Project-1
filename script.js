@@ -8,15 +8,19 @@ const apiKey = "395206-Hayley-2B98EPSV"
 const queryURL = "https://tastedive.com/api/similar";
 
 // localstorage variables
+
 let savedArtists = []
 let savedsongName = []
 let savedPoster= []
 let savedlyrics = []
+<<<<<<< Updated upstream
 
 // test
 
 
 
+=======
+>>>>>>> Stashed changes
 
   
 $(".lyricSearchBtn").click(function(){
@@ -47,7 +51,11 @@ $(".lyricSearchBtn").click(function(){
     console.log("we're in the function");
         
 })
+<<<<<<< Updated upstream
 // localstorage functions
+=======
+
+>>>>>>> Stashed changes
 function saveSearchedArtist (artist) {
     savedArtists.push(artist);
     window.localStorage.setItem('artists', JSON.stringify(savedArtists));
