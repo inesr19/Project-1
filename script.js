@@ -12,7 +12,16 @@ const queryURL = "https://tastedive.com/api/similar";
 const modal = $('#modal1');
 
 // localstorage variables
+
 let savedArtists = []
+let savedsongName = []
+let savedPoster= []
+let savedlyrics = []
+
+// test to push
+
+
+
 
 $(document).ready(function() {
     $('#modal1').modal();
@@ -63,11 +72,24 @@ $(".lyricSearchBtn").click(function(){
     })
 
 })
+// localstorage functions
 
 
 function saveSearchedArtist(artist) {
     savedArtists.push(artist);
     window.localStorage.setItem('artists', JSON.stringify(savedArtists));
+}
+function savesongName (songName) {
+    savedsongName.push(songName);
+    window.localStorage.setItem('songName', JSON.stringify(savedsongName));
+}
+function savePoster (poster) {
+    savedPoster.push(poster);
+    window.localStorage.setItem('poster', JSON.stringify(savedPoster));
+}
+function savelyrics (lyrics) {
+    savedlyrics.push(lyrics);
+    window.localStorage.setItem('lyrics', JSON.stringify(savedlyrics));
 }
 
 function handleTasteDive (modArtist) {
@@ -157,8 +179,10 @@ function createArtistBio(artistObject) {
 }
 
 
-//createArtistBio(testArtistObject);
-
+// // const artistName = response.tracks.hits[0].track.subtitle;
+// const songName = response.tracks.hits[0].track.title
+// console.log("this is artist: ", artistName);
+// console.log("this is name: ", songName);
 
 //console.log("this is artist: ", artistName);
 //console.log("this is name: ", songName);
