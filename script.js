@@ -66,13 +66,9 @@ function handleShazam () {
     console.log(artistObject);
     handleTasteDive(modArtist);
     })
-<<<<<<< HEAD
-}
-=======
 
-})
+}
 // localstorage functions
->>>>>>> main
 
 
 function saveSearchedArtist(artist) {
