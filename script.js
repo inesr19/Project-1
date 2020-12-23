@@ -26,7 +26,7 @@ $(".lyricSearchBtn").click(function(){
             "x-rapidapi-host": "shazam.p.rapidapi.com"
         }
     }).done(function (response) {
-    console.log(response);
+    console.log("this is shazam response: ", response);
     // second ajax call here
     // code here will be executed once we get response from Shazam
     const artistName = response.tracks.hits[0].track.subtitle;
@@ -58,6 +58,12 @@ function saveSearchedArtist (artist) {
 }
 
 function handleTasteDive (modArtist) {
+    // if the shazam return has ft artist, split string and return first in returned array
+    if (modArtist.includes("Feat")){
+        modArtist = modArtist.split("-Feat");
+        modArtist = modArtist[0];
+    }
+    
     $.ajax({
         type: "GET",
         url: queryURL,
@@ -72,11 +78,20 @@ function handleTasteDive (modArtist) {
             info: 1, // to include a return of youtube links
         },
         }).then(function(response) {
+
+
+
+
         // set total similar artist to 3 for displaying only 3 artists, can adjust for fewer or more
         const totalSimArtists = 3;
-        // recommendedArtistsDiv.empty();
+
+        
+        
+        // clear list before appending new search results
+        $(".similarArtists").empty();
         // for each similar artist, add a list item
         for (var i = 0; i < totalSimArtists; i++){
+
             // youtube link with response ID to form html link
             let youtubeLink = "https://www.youtube.com/watch?v=" + response.Similar.Results[i].yID
             // name of similar artist
