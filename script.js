@@ -41,8 +41,9 @@ $(".lyricSearchBtn").click(function(){
     };
     // second ajax call here
     // code here will be executed once we get response from Shazam
+    console.log("this is shazam: ", response);
     const artistName = response.tracks.hits[0].track.subtitle;
-    const modArtist = artistName.replace(" ", "-");
+    const modArtist = artistName.replace(" ", "-") && artistName.replace("Feat.", "feat");
     const songName = response.tracks.hits[0].track.title
     const songLyrics = response.tracks.hits[0].track.url
     const songArt = response.tracks.hits[0].track.images.background
@@ -69,7 +70,14 @@ function saveSearchedArtist(artist) {
     window.localStorage.setItem('artists', JSON.stringify(savedArtists));
 }
 
-function handleTasteDive(modArtist) {
+function handleTasteDive (modArtist) {
+    console.log("this is before if statement: ", modArtist)
+    // if the shazam return has ft artist, split string and return first in returned array
+    if (modArtist.includes("feat")){
+        modArtist = modArtist.split("feat")[0];
+        console.log("this is modartist: ", modArtist);
+    }
+    
     $.ajax({
         type: "GET",
         url: queryURL,
@@ -86,7 +94,8 @@ function handleTasteDive(modArtist) {
     }).then(function (response) {
         // set total similar artist to 3 for displaying only 3 artists, can adjust for fewer or more
         const totalSimArtists = 3;
-        // recommendedArtistsDiv.empty();
+        // clear list before appending new search results
+        $(".similarArtists").empty();
         // for each similar artist, add a list item
         for (var i = 0; i < totalSimArtists; i++) {
             // youtube link with response ID to form html link
