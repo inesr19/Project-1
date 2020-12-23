@@ -7,9 +7,16 @@ const recommendedArtistsDiv = $('.recommendedArtists')
 const apiKey = "395206-Hayley-2B98EPSV"
 const queryURL = "https://tastedive.com/api/similar";
 
+//modal test vars
+
+const modal = $('#modal1');
+
 // localstorage variables
 let savedArtists = []
 
+$(document).ready(function() {
+    $('#modal1').modal();
+});
   
 $(".lyricSearchBtn").click(function(){
     
@@ -27,6 +34,11 @@ $(".lyricSearchBtn").click(function(){
         }
     }).done(function (response) {
     console.log(response);
+    if ($.isEmptyObject(response)){
+        console.log('oops!');
+        $('#modal1').modal('open');
+        return
+    };
     // second ajax call here
     // code here will be executed once we get response from Shazam
     const artistName = response.tracks.hits[0].track.subtitle;
@@ -44,13 +56,11 @@ $(".lyricSearchBtn").click(function(){
     console.log(artistObject);
     handleTasteDive(modArtist);
 
-    });
-
 
     //saveSearchedArtist(searchedLyrics);
     console.log("we're in the function");
-        
-})
+    })
+});
 
 function saveSearchedArtist (artist) {
     savedArtists.push(artist);
@@ -95,7 +105,7 @@ function handleTasteDive (modArtist) {
             
         }
 
-        });
+        })
 }
 
 let testArtistObject = {
@@ -115,7 +125,7 @@ function createArtistBio (artistObject) {
     let lyrics = $('<a>').attr('href', artistObject.lyrics).text('Click for lyrics');
     artistInfoDiv.append(artist).append(poster);
     lyricsDiv.append(song).append(lyrics);
-}
+};
 
 //createArtistBio(testArtistObject);
 
@@ -123,5 +133,4 @@ function createArtistBio (artistObject) {
 //console.log("this is artist: ", artistName);
 //console.log("this is name: ", songName);
 
-
-
+//.fail(function(error){console.log('somethings wrong')})
