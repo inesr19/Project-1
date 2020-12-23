@@ -129,6 +129,7 @@ function createArtistBio(artistObject) {
         target: '_blank',
         text: songLink,
     }).appendTo(lyricsDiv);
+
 }
 
 //createArtistBio(testArtistObject);
