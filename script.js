@@ -13,14 +13,11 @@ let savedArtists = []
 let savedsongName = []
 let savedPoster= []
 let savedlyrics = []
-<<<<<<< Updated upstream
 
 // test
 
 
 
-=======
->>>>>>> Stashed changes
 
   
 $(".lyricSearchBtn").click(function(){
@@ -51,11 +48,8 @@ $(".lyricSearchBtn").click(function(){
     console.log("we're in the function");
         
 })
-<<<<<<< Updated upstream
 // localstorage functions
-=======
 
->>>>>>> Stashed changes
 function saveSearchedArtist (artist) {
     savedArtists.push(artist);
     window.localStorage.setItem('artists', JSON.stringify(savedArtists));
