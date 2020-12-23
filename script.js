@@ -60,7 +60,9 @@ $(".lyricSearchBtn").click(function(){
     //saveSearchedArtist(searchedLyrics);
     console.log("we're in the function");
     })
+
 })
+
 
 function saveSearchedArtist(artist) {
     savedArtists.push(artist);
@@ -105,7 +107,9 @@ function handleTasteDive(modArtist) {
 
         }
 
+
     });
+
 }
 
 let testArtistObject = {
@@ -119,6 +123,7 @@ let testArtistObject = {
 function createArtistBio(artistObject) {
     artistInfoDiv.empty();
     lyricsDiv.empty();
+
     // Links title of song with url to lyrics.
     let lyricsUrl = 'https://www.shazam.com/track/46697155/' + artistObject.song;
     const songLink = artistObject.song;
@@ -141,6 +146,7 @@ function createArtistBio(artistObject) {
     }).appendTo(lyricsDiv);
 
 }
+
 
 //createArtistBio(testArtistObject);
 
