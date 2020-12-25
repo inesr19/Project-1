@@ -29,7 +29,7 @@ $(".lyricSearchBtn").click(function(){
         "url": "https://shazam.p.rapidapi.com/search?term=" + searchedLyrics + "&locale=en-US&offset=0&limit=5",
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "908b7a298emsh26a4313bfcc5dd1p11e1dbjsn03ef870d77d7",
+            "x-rapidapi-key": "1c9a023ed1msh7f6737bed07a8e3p126d31jsnfd7845cb0d56",
             "x-rapidapi-host": "shazam.p.rapidapi.com"
         }
     }).done(function (response) {
@@ -44,6 +44,7 @@ $(".lyricSearchBtn").click(function(){
     console.log("this is shazam: ", response);
     const artistName = response.tracks.hits[0].track.subtitle;
     const modArtist = artistName.replace(" ", "-") && artistName.replace("Feat.", "feat");
+    const artistKey = response.tracks.hits[0].track.key;
     const songName = response.tracks.hits[0].track.title
     const songLyrics = response.tracks.hits[0].track.url
     const songArt = response.tracks.hits[0].track.images.background
@@ -56,6 +57,12 @@ $(".lyricSearchBtn").click(function(){
     createArtistBio(artistObject);
     console.log(artistObject);
     handleTasteDive(modArtist);
+    // handleUndefined(artistKey);
+
+    console.log("this is artistKye:",artistKey)
+
+
+
 
 
     //saveSearchedArtist(searchedLyrics);
@@ -70,6 +77,8 @@ function saveSearchedArtist(artist) {
     window.localStorage.setItem('artists', JSON.stringify(savedArtists));
 }
 
+
+
 function handleTasteDive (modArtist) {
     console.log("this is before if statement: ", modArtist)
     // if the shazam return has ft artist, split string and return first in returned array
@@ -77,6 +86,8 @@ function handleTasteDive (modArtist) {
         modArtist = modArtist.split("feat")[0];
         console.log("this is modartist: ", modArtist);
     }
+
+
     
     $.ajax({
         type: "GET",
@@ -96,10 +107,28 @@ function handleTasteDive (modArtist) {
         const totalSimArtists = 3;
         // clear list before appending new search results
         $(".similarArtists").empty();
-        // for each similar artist, add a list item
+       
+        
+        var tasteDiveResult = response.Similar.Results;
+
+        
+        if (tasteDiveResult.length < totalSimArtists){
+            console.log("well shit")
+            // handleUndefined(artistKey);        
+
+ 
+        } else{
+        
         for (var i = 0; i < totalSimArtists; i++) {
+            console.log("before youtube id")
+            
+
+            var youtubeID = response.Similar.Results[i].yID;
+            console.log("youtube id: ", youtubeID)
+            console.log("you're good")
+
             // youtube link with response ID to form html link
-            let youtubeLink = "https://www.youtube.com/watch?v=" + response.Similar.Results[i].yID
+            let youtubeLink = "https://www.youtube.com/watch?v=" + youtubeID;
             // name of similar artist
             const tasteDiveResults = (response.Similar.Results[i].Name);
             // hyper link to youtube with name of artist as hyperlink
@@ -113,12 +142,30 @@ function handleTasteDive (modArtist) {
             // console.log("this is taste dive result: ", tasteDiveResults)
             console.log("td response: ", youtubeLink)
             console.log("tastdive object: ", response)
-
+            
         }
-
-
+    }
     });
 
+}
+
+function handleUndefined(artistKey){
+    console.log("AK:",artistKey)
+    const settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://shazam.p.rapidapi.com/songs/list-recommendations?key=" + artistKey + "&locale=en-US",
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "1c9a023ed1msh7f6737bed07a8e3p126d31jsnfd7845cb0d56",
+            "x-rapidapi-host": "shazam.p.rapidapi.com"
+        }
+    };
+    
+    $.ajax(settings).done(function (response) {
+        console.log("3rd ajax call: ", response);
+        
+    });
 }
 
 let testArtistObject = {
@@ -164,3 +211,7 @@ function createArtistBio(artistObject) {
 //console.log("this is name: ", songName);
 
 //.fail(function(error){console.log('somethings wrong')})
+
+
+
+
