@@ -1,27 +1,36 @@
 //JQuery Element Variables
 
 const lyricSearchBtn = $('.lyricSearchBtn');
-const artistInfoDiv = $('.artistInfo')
-const lyricsDiv = $('.lyrics')
-const recommendedArtistsDiv = $('.recommendedArtists')
-const apiKey = "395206-Hayley-2B98EPSV"
+const artistInfoDiv = $('.artistInfo');
+const lyricsDiv = $('.lyrics');
+const recommendedArtistsDiv = $('.recommendedArtists');
+const apiKey = "395206-Hayley-2B98EPSV";
 const queryURL = "https://tastedive.com/api/similar";
-
+const similarArtistsDiv = $('.similarArtists');
 //modal test vars
 
 const modal = $('#modal1');
 
 // localstorage variables
+
 let savedArtists = []
+let savedsongName = []
+let savedPoster= []
+let savedlyrics = []
+
+// test to push
+
+
+
 
 $(document).ready(function() {
-    $('#modal1').modal();
+    modal.modal();
 });
   
-$(".lyricSearchBtn").click(function(){
-    
-    
-    
+lyricSearchBtn.click(handleShazam)
+
+
+function handleShazam () {
     const searchedLyrics = $('.lyricSearchBar').val();
     $.ajax({
         "async": true,
@@ -36,12 +45,12 @@ $(".lyricSearchBtn").click(function(){
     console.log(response);
     if ($.isEmptyObject(response)){
         console.log('oops!');
-        $('#modal1').modal('open');
+        modal.modal('open');
+        artistInfoDiv.empty();
+        lyricsDiv.empty();
+        similarArtistsDiv.empty();
         return
     };
-    // second ajax call here
-    // code here will be executed once we get response from Shazam
-    console.log("this is shazam: ", response);
     const artistName = response.tracks.hits[0].track.subtitle;
     const modArtist = artistName.replace(" ", "-") && artistName.replace("Feat.", "feat");
     const artistKey = response.tracks.hits[0].track.key;
@@ -60,12 +69,24 @@ $(".lyricSearchBtn").click(function(){
     handleTasteDive(modArtist, artistKey);
 
     })
-})
+}
 
 
 function saveSearchedArtist(artist) {
     savedArtists.push(artist);
     window.localStorage.setItem('artists', JSON.stringify(savedArtists));
+}
+function savesongName (songName) {
+    savedsongName.push(songName);
+    window.localStorage.setItem('songName', JSON.stringify(savedsongName));
+}
+function savePoster (poster) {
+    savedPoster.push(poster);
+    window.localStorage.setItem('poster', JSON.stringify(savedPoster));
+}
+function savelyrics (lyrics) {
+    savedlyrics.push(lyrics);
+    window.localStorage.setItem('lyrics', JSON.stringify(savedlyrics));
 }
 
 
@@ -154,14 +175,6 @@ function handleUndefined(artistKey){
     });
 }
 
-let testArtistObject = {
-    artist: 'Kanye West',
-    poster: './assets/images/kanyeTestImage.jpeg',
-    song: 'Power',
-    lyrics: 'https://www.shazam.com/track/52699656/power'
-
-}
-
 function createArtistBio(artistObject) {
     artistInfoDiv.empty();
     lyricsDiv.empty();
@@ -190,8 +203,10 @@ function createArtistBio(artistObject) {
 }
 
 
-//createArtistBio(testArtistObject);
-
+// // const artistName = response.tracks.hits[0].track.subtitle;
+// const songName = response.tracks.hits[0].track.title
+// console.log("this is artist: ", artistName);
+// console.log("this is name: ", songName);
 
 //console.log("this is artist: ", artistName);
 //console.log("this is name: ", songName);
