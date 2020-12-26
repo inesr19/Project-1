@@ -29,7 +29,7 @@ $(".lyricSearchBtn").click(function(){
         "url": "https://shazam.p.rapidapi.com/search?term=" + searchedLyrics + "&locale=en-US&offset=0&limit=5",
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "1c9a023ed1msh7f6737bed07a8e3p126d31jsnfd7845cb0d56",
+            "x-rapidapi-key": "198c5d9404msh8afbdbe95aa7f12p115299jsn1d3f7e17a3ea",
             "x-rapidapi-host": "shazam.p.rapidapi.com"
         }
     }).done(function (response) {
@@ -52,23 +52,14 @@ $(".lyricSearchBtn").click(function(){
         artist : artistName,
         song : songName,
         lyrics : songLyrics,
-        poster : songArt
+        poster : songArt,
+        key : artistKey
     }
     createArtistBio(artistObject);
     console.log(artistObject);
-    handleTasteDive(modArtist);
-    // handleUndefined(artistKey);
+    handleTasteDive(modArtist, artistKey);
 
-    console.log("this is artistKye:",artistKey)
-
-
-
-
-
-    //saveSearchedArtist(searchedLyrics);
-    console.log("we're in the function");
     })
-
 })
 
 
@@ -78,21 +69,18 @@ function saveSearchedArtist(artist) {
 }
 
 
+function handleTasteDive (modArtist, artistKey) {
 
-function handleTasteDive (modArtist) {
-    console.log("this is before if statement: ", modArtist)
     // if the shazam return has ft artist, split string and return first in returned array
     if (modArtist.includes("feat")){
         modArtist = modArtist.split("feat")[0];
         console.log("this is modartist: ", modArtist);
-    }
+    };
 
-
-    
     $.ajax({
         type: "GET",
         url: queryURL,
-        jsonp: "callback", // not sure if we need this, if commented out, this test still works
+        jsonp: "callback", 
         dataType: "jsonp", // send JSON data without worry of cross-domain issues
 
         // data object is for TasteDive API calls
@@ -103,68 +91,66 @@ function handleTasteDive (modArtist) {
             info: 1, // to include a return of youtube links
         },
     }).then(function (response) {
-        // set total similar artist to 3 for displaying only 3 artists, can adjust for fewer or more
+        // variable for number of items displayed
         const totalSimArtists = 3;
         // clear list before appending new search results
         $(".similarArtists").empty();
-       
-        
+                
         var tasteDiveResult = response.Similar.Results;
+        // if the object is empty, run handleUndefined function
+        if (tasteDiveResult.length < 1){
 
-        
-        if (tasteDiveResult.length < totalSimArtists){
-            console.log("well shit")
-            // handleUndefined(artistKey);        
+            handleUndefined(artistKey);        
 
- 
-        } else{
-        
-        for (var i = 0; i < totalSimArtists; i++) {
-            console.log("before youtube id")
-            
+        } else {
 
-            var youtubeID = response.Similar.Results[i].yID;
-            console.log("youtube id: ", youtubeID)
-            console.log("you're good")
+            for (var i = 0; i < totalSimArtists; i++) {
+                
+                var youtubeID = response.Similar.Results[i].yID;
+                var youtubeLink = "https://www.youtube.com/watch?v=" + youtubeID; // youtube link with response ID to form html link
+                var tasteDiveResults = (response.Similar.Results[i].Name); // name of similar artist
+                var hrefAttr = $('<a>').attr('href', youtubeLink).text(tasteDiveResults); // hyperlink
+                var listAttr = $("<li>").append(hrefAttr); // create list element with hyperlink
+                $(".similarArtists").append(listAttr); // append the hyperlink to the ul 
 
-            // youtube link with response ID to form html link
-            let youtubeLink = "https://www.youtube.com/watch?v=" + youtubeID;
-            // name of similar artist
-            const tasteDiveResults = (response.Similar.Results[i].Name);
-            // hyper link to youtube with name of artist as hyperlink
-            let hrefAttr = $('<a>').attr('href', youtubeLink).text(tasteDiveResults);
-            // create list element with hyperlink as content
-            let listAttr = $("<li>").append(hrefAttr);
-
-            // append the hyperlink to the ul 
-            $(".similarArtists").append(listAttr);
-
-            // console.log("this is taste dive result: ", tasteDiveResults)
-            console.log("td response: ", youtubeLink)
-            console.log("tastdive object: ", response)
-            
+            }
         }
-    }
     });
-
 }
 
 function handleUndefined(artistKey){
-    console.log("AK:",artistKey)
+    console.log("AK:", artistKey)
+
     const settings = {
         "async": true,
         "crossDomain": true,
         "url": "https://shazam.p.rapidapi.com/songs/list-recommendations?key=" + artistKey + "&locale=en-US",
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "1c9a023ed1msh7f6737bed07a8e3p126d31jsnfd7845cb0d56",
+            "x-rapidapi-key": "198c5d9404msh8afbdbe95aa7f12p115299jsn1d3f7e17a3ea",
             "x-rapidapi-host": "shazam.p.rapidapi.com"
         }
     };
     
     $.ajax(settings).done(function (response) {
-        console.log("3rd ajax call: ", response);
-        
+
+        const totalReturnArtists = 3;
+        var isEmptyObject = jQuery.isEmptyObject(response) // returns true or false 
+
+        // if the object is empty, post sorry
+        if (isEmptyObject === true){
+            $(".similarArtists").append("Sorry, similar recommendations are not availible for this search.");
+        } else { 
+            for (var i = 0; i < totalReturnArtists; i++) {
+
+                var similarArtistLink = response.tracks[i].url; // shazam url
+                var similarArtistResults = response.tracks[i].subtitle; // name of artist
+                var artistHrefAttr = $('<a>').attr('href', similarArtistLink).text(similarArtistResults); // href with artist name
+                var artistListAttr = $("<li>").append(artistHrefAttr); // list href item 
+                $(".similarArtists").append(artistListAttr); // add list item
+
+            }
+        }
     });
 }
 
