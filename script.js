@@ -187,10 +187,19 @@ function createArtistBio(artistObject) {
     $('<div>', {
         id: 'artist',
         text: artistObject.artist
-    }).append($('<img>', {
+    }).appendTo(artistInfoDiv);
+        
+    $('<img>', {
+        class: 'responsive-img materialboxed',
         id: 'poster',
         src: artistObject.poster
-    })).appendTo(artistInfoDiv);
+    }).appendTo(artistInfoDiv);
+
+    // Expands displayed poster.
+    $(document).ready(function(elem){
+        var instance = M.Materialbox.getInstance(elem);
+        $('.materialboxed').materialbox(instance);
+    });
 
     // Displays song name as a link to the lyrics.
     $('<a>', {
