@@ -1,6 +1,7 @@
 //JQuery Element Variables
 
 const lyricSearchBtn = $('.lyricSearchBtn');
+const inputSearch = $('.lyricSearchBar');
 const artistInfoDiv = $('.artistInfo');
 const lyricsDiv = $('.lyrics');
 const recommendedArtistsDiv = $('.recommendedArtists');
@@ -22,16 +23,30 @@ let savedlyrics = []
 
 
 
-
 $(document).ready(function() {
+    const allEntries = JSON.parse(window.localStorage.getItem("allEntries")) || [];
+    const map = {};
+    for (let i = 0; i < allEntries.length; i++) {
+        map[allEntries[i]] = null;
+    }
+    inputSearch.autocomplete({
+        data: map,
+    });
     modal.modal();
 });
-  
-lyricSearchBtn.click(handleShazam)
+
+inputSearch.on('change', handleShazam);
 
 
-function handleShazam () {
-    const searchedLyrics = $('.lyricSearchBar').val();
+
+
+function handleShazam (event) {
+    const searchedLyrics = event.target.value;
+
+    const allEntries = JSON.parse(window.localStorage.getItem("allEntries")) || [];
+    allEntries.unshift(searchedLyrics);
+    window.localStorage.setItem('allEntries', JSON.stringify(allEntries));
+
     $.ajax({
         "async": true,
         "crossDomain": true,
