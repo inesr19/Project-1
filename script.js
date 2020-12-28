@@ -180,7 +180,7 @@ function createArtistBio(artistObject) {
     lyricsDiv.empty();
 
     // Links title of song with url to lyrics.
-    let lyricsUrl = 'https://www.shazam.com/track/46697155/' + artistObject.song;
+    let lyricsUrl = 'https://www.shazam.com/track/' + artistObject.key;
     const songLink = artistObject.song;
 
     // Displays artist name and poster.
