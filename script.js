@@ -195,17 +195,26 @@ function createArtistBio(artistObject) {
     lyricsDiv.empty();
 
     // Links title of song with url to lyrics.
-    let lyricsUrl = 'https://www.shazam.com/track/46697155/' + artistObject.song;
+    let lyricsUrl = 'https://www.shazam.com/track/' + artistObject.key;
     const songLink = artistObject.song;
 
     // Displays artist name and poster.
     $('<div>', {
         id: 'artist',
         text: artistObject.artist
-    }).append($('<img>', {
+    }).appendTo(artistInfoDiv);
+        
+    $('<img>', {
+        class: 'responsive-img materialboxed',
         id: 'poster',
         src: artistObject.poster
-    })).appendTo(artistInfoDiv);
+    }).appendTo(artistInfoDiv);
+
+    // Expands displayed poster.
+    $(document).ready(function(elem){
+        var instance = M.Materialbox.getInstance(elem);
+        $('.materialboxed').materialbox(instance);
+    });
 
     // Displays song name as a link to the lyrics.
     $('<a>', {

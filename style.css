@@ -1,15 +1,20 @@
 body {
     padding: 10%;
-    background-color: gainsboro;
+    background-color: #7986cb;
+    background-image: url(./assets/images/pngegg3.png), url(./assets/images/pngegg2.png);
+    background-repeat: no-repeat;
+    background-position: top left, 650px 385px;
 }
 
 .header-container {
     text-align: center;
+    text-shadow: 0 0 10px black;
+    color: white;
 }
 
 #searchBarDiv {
     padding: 2%;
-    box-shadow: 0 0 5px;
+    box-shadow: 0 0 5px black;
     border-radius: 5px;
     background-color: white;
     
@@ -22,10 +27,19 @@ body {
 
 h5 {
     font-weight: bold;
-    text-align: center;
-    text-decoration: underline;
-    color: black;
+    color: white;
+    text-shadow: 0 0 10px black;
     
+}
+
+.results {
+    display: flex;
+}
+
+#artist {
+    align-items: center;
+    font-size: large;
+    font-weight: bold;
 }
 
 
