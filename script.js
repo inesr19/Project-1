@@ -71,7 +71,7 @@ function handleShazam () {
     })
 }
 
-
+// functions for local storage
 function saveSearchedArtist(artist) {
     savedArtists.push(artist);
     window.localStorage.setItem('artists', JSON.stringify(savedArtists));
