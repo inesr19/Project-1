@@ -18,7 +18,7 @@ let savedsongName = []
 let savedPoster= []
 let savedlyrics = []
 
-// test to push
+
 
 
 
@@ -76,19 +76,26 @@ function saveSearchedArtist(artist) {
     savedArtists.push(artist);
     window.localStorage.setItem('artists', JSON.stringify(savedArtists));
 }
+saveSearchedArtist()
+
 function savesongName (songName) {
     savedsongName.push(songName);
     window.localStorage.setItem('songName', JSON.stringify(savedsongName));
 }
+savesongName ()
+
 function savePoster (poster) {
     savedPoster.push(poster);
     window.localStorage.setItem('poster', JSON.stringify(savedPoster));
 }
+savePoster ()
+
 function savelyrics (lyrics) {
     savedlyrics.push(lyrics);
     window.localStorage.setItem('lyrics', JSON.stringify(savedlyrics));
 }
 
+savelyrics () 
 
 function handleTasteDive (modArtist, artistKey) {
 
