@@ -11,12 +11,8 @@ const similarArtistsDiv = $('.similarArtists');
 
 const modal = $('#modal1');
 
-// localstorage variables
 
-let savedArtists = []
-let savedsongName = []
-let savedPoster= []
-let savedlyrics = []
+ 
 
 
 
@@ -67,42 +63,32 @@ function handleShazam () {
     createArtistBio(artistObject);
     console.log(artistObject);
     handleTasteDive(modArtist, artistKey);
+  
+    // localStorage for artists,poster,lyrics
+    localStorage.setItem("artists",  artistName);
+    // localStorage.getItem("artists").append
+
+    localStorage.setItem("poster",songArt);
+    // localStorage.getItem("poster").append("");;
+    localStorage.setItem("lyrics",songLyrics);
+    // localStorage.getItem("lyrics").append("");;
+    
+
 
     })
+    console.log(localStorage)
+
+
 }
 
-// functions for local storage
-function saveSearchedArtist(artist) {
-    savedArtists.push(artist);
-    window.localStorage.setItem('artists', JSON.stringify(savedArtists));
-}
-saveSearchedArtist()
 
-function savesongName (songName) {
-    savedsongName.push(songName);
-    window.localStorage.setItem('songName', JSON.stringify(savedsongName));
-}
-savesongName ()
-
-function savePoster (poster) {
-    savedPoster.push(poster);
-    window.localStorage.setItem('poster', JSON.stringify(savedPoster));
-}
-savePoster ()
-
-function savelyrics (lyrics) {
-    savedlyrics.push(lyrics);
-    window.localStorage.setItem('lyrics', JSON.stringify(savedlyrics));
-}
-
-savelyrics () 
 
 function handleTasteDive (modArtist, artistKey) {
 
     // if the shazam return has ft artist, split string and return first in returned array
     if (modArtist.includes("feat")){
         modArtist = modArtist.split("feat")[0];
-        console.log("this is modartist: ", modArtist);
+        console.log("this is modartist: ", modArtist)
     };
 
     $.ajax({
@@ -142,7 +128,11 @@ function handleTasteDive (modArtist, artistKey) {
                 $(".similarArtists").append(listAttr); // append the hyperlink to the ul 
 
             }
+        
         }
+        // localStorage for similar artists
+        localStorage.setItem("similar",tasteDiveResult[0].Name + tasteDiveResult[1].Name+ tasteDiveResult[2].Name);
+        // localStorage.getItem("similar").append ("");
     });
 }
 
@@ -217,6 +207,10 @@ function createArtistBio(artistObject) {
     }).appendTo(lyricsDiv);
 
 }
+
+
+
+
 
 
 // // const artistName = response.tracks.hits[0].track.subtitle;
