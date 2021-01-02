@@ -214,6 +214,9 @@ function createArtistBio(artistObject) {
 
 
 
+
+
+
 // // const artistName = response.tracks.hits[0].track.subtitle;
 // const songName = response.tracks.hits[0].track.title
 // console.log("this is artist: ", artistName);
