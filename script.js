@@ -40,6 +40,7 @@ function handleShazam () {
     if ($.isEmptyObject(response)){
         console.log('oops!');
         modal.modal('open');
+        $(".loadBar").empty();
         artistInfoDiv.empty();
         lyricsDiv.empty();
         similarArtistsDiv.empty();
