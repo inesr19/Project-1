@@ -36,10 +36,32 @@ h5 {
     display: flex;
 }
 
-#artist {
+#artist{
     align-items: center;
     font-size: large;
     font-weight: bold;
+    color: white;
 }
 
+#link-lyrics, .simArtistCSS{
+    align-items: center;
+    font-size: large;
+    font-weight: bold;
+    /* color: white; */
+}
+
+/* unvisited link */
+a:link {
+    color: white;
+  }
+
+/* visited link */
+a:visited {
+    color: #A0B19F;
+  }
+
+/* mouse over link */
+a:hover {
+    color: hotpink;
+  }
 

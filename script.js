@@ -13,12 +13,6 @@ const modal = $('#modal1');
 
 
  
-
-
-
-
-
-
 $(document).ready(function() {
     modal.modal();
 });
@@ -123,7 +117,7 @@ function handleTasteDive (modArtist, artistKey) {
                 var youtubeID = response.Similar.Results[i].yID;
                 var youtubeLink = "https://www.youtube.com/watch?v=" + youtubeID; // youtube link with response ID to form html link
                 var tasteDiveResults = (response.Similar.Results[i].Name); // name of similar artist
-                var hrefAttr = $('<a>').attr('href', youtubeLink).text(tasteDiveResults); // hyperlink
+                var hrefAttr = $("<a class = simArtistCSS>").attr("href", youtubeLink).attr("target","_blank").text(tasteDiveResults); // hyperlink
                 var listAttr = $("<li>").append(hrefAttr); // create list element with hyperlink
                 $(".similarArtists").append(listAttr); // append the hyperlink to the ul 
 
