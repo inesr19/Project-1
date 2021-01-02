@@ -1,4 +1,5 @@
 # Music Spider
+After searching a string of song lyrics, a user is provided with information about the song. Using AJAX calls to the Shazam API and the TasteDive API, the information returned includes the artist, song name, lyrics and similar artists.
 
 ## Link to webpage
 https://inesr19.github.io/Project-1/
