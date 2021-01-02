@@ -23,7 +23,7 @@ lyricSearchBtn.click(handleShazam)
 function handleShazam () {
     var loadBarDiv = $("<div class='progress progressModal'>");
     var loadBarContent = $(loadBarDiv).append('<div class="indeterminate">');
-    $("#searchBarDiv").append(loadBarContent);
+    $(".loadBar").html(loadBarContent);
     
     const searchedLyrics = $('.lyricSearchBar').val();
     $.ajax({
@@ -61,7 +61,7 @@ function handleShazam () {
     createArtistBio(artistObject);
     console.log(artistObject);
     handleTasteDive(modArtist, artistKey);
-    $(loadBarContent).remove();
+    $(".loadBar").empty();
   
     // localStorage for artists,poster,lyrics
     localStorage.setItem("artists",  artistName);
