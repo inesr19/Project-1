@@ -36,7 +36,7 @@ h5 {
     display: flex;
 }
 
-#artist{
+#artist, #sorryMsg{
     align-items: center;
     font-size: large;
     font-weight: bold;
