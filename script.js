@@ -28,7 +28,7 @@ function handleShazam () {
         "url": "https://shazam.p.rapidapi.com/search?term=" + searchedLyrics + "&locale=en-US&offset=0&limit=5",
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "198c5d9404msh8afbdbe95aa7f12p115299jsn1d3f7e17a3ea",
+            "x-rapidapi-key": "73a4e4991bmsh73de38b20c5a435p138c1fjsn33aed58d317e",
             "x-rapidapi-host": "shazam.p.rapidapi.com"
         }
     }).done(function (response) {
@@ -139,7 +139,7 @@ function handleUndefined(artistKey){
         "url": "https://shazam.p.rapidapi.com/songs/list-recommendations?key=" + artistKey + "&locale=en-US",
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "198c5d9404msh8afbdbe95aa7f12p115299jsn1d3f7e17a3ea",
+            "x-rapidapi-key": "73a4e4991bmsh73de38b20c5a435p138c1fjsn33aed58d317e",
             "x-rapidapi-host": "shazam.p.rapidapi.com"
         }
     };
