@@ -63,16 +63,15 @@ function handleShazam () {
     createArtistBio(artistObject);
     console.log(artistObject);
     handleTasteDive(modArtist, artistKey);
-  
+   
     // localStorage for artists,poster,lyrics
     localStorage.setItem("artists",  artistName);
-    // localStorage.getItem("artists").append
-
+    // document.getElementById("").innerHTML = localStorage.getItem("artists");
     localStorage.setItem("poster",songArt);
-    // localStorage.getItem("poster").append("");;
+    // document.getElementById("").innerHTML = localStorage.getItem("poster");
     localStorage.setItem("lyrics",songLyrics);
-    // localStorage.getItem("lyrics").append("");;
-    
+    // document.getElementById("").innerHTML = localStorage.getItem("lyrics");
+
 
 
     })
@@ -132,7 +131,7 @@ function handleTasteDive (modArtist, artistKey) {
         }
         // localStorage for similar artists
         localStorage.setItem("similar",tasteDiveResult[0].Name + tasteDiveResult[1].Name+ tasteDiveResult[2].Name);
-        // localStorage.getItem("similar").append ("");
+        // document.getElementById("").innerHTML = localStorage.getItem("similar");
     });
 }
 
@@ -211,8 +210,6 @@ function createArtistBio(artistObject) {
 
 
 
-
-
 // // const artistName = response.tracks.hits[0].track.subtitle;
 // const songName = response.tracks.hits[0].track.title
 // console.log("this is artist: ", artistName);
@@ -222,7 +219,6 @@ function createArtistBio(artistObject) {
 //console.log("this is name: ", songName);
 
 //.fail(function(error){console.log('somethings wrong')})
-
 
 
 
