@@ -27,20 +27,21 @@
         <div class="content-container">
             <div class="row input-field" id="searchBarDiv">
                 <input class="lyricSearchBar" type="text" placeholder="lyrics here">
-                <button class="lyricSearchBtn">Search</button>
+                <button class="lyricSearchBtn waves-effect waves-light btn">Search</button>
+                <div class="loadBar"></div>
             </div>
             <div class="row results">
                 <div class="col s12 m4">
                     <h5>Artist</h5>
-                    <div class="col s12 m5 artistInfo"></div>
+                    <div class="col s12 m11 artistInfo"></div>  <!-- "m" arrtibute changes width of column-->
                 </div>
                 <div class="col s12 m4">
                     <h5>Song & Lyrics</h5>
-                    <div class="col s12 m4 lyrics"></div>
+                    <div class="col s12 m11 lyrics"></div>
                 </div>
                 <div class="col s12 m3">
                     <h5>Similar Artists</h5>
-                    <div class="col s12 m4 recommendedArtists">
+                    <div class="col s12 m11 recommendedArtists">
                         <ul class="similarArtists">
 
                         </ul>
@@ -63,6 +64,8 @@
           <a href="#!" class="modal-close waves-effect waves-green btn-flat">Okay</a>
         </div>
       </div>
+
+
 
     <script src="./script.js"></script>
 

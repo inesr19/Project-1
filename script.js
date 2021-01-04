@@ -23,6 +23,8 @@ let savedlyrics = []
 
 
 
+
+ 
 $(document).ready(function() {
     const allEntries = JSON.parse(window.localStorage.getItem("allEntries")) || [];
     const map = {};
@@ -46,14 +48,21 @@ function handleShazam (event) {
     const allEntries = JSON.parse(window.localStorage.getItem("allEntries")) || [];
     allEntries.unshift(searchedLyrics);
     window.localStorage.setItem('allEntries', JSON.stringify(allEntries));
+}
 
+function handleShazam () {
+    var loadBarDiv = $("<div class='progress progressModal'>");
+    var loadBarContent = $(loadBarDiv).append('<div class="indeterminate">');
+    $(".loadBar").html(loadBarContent);
+    
+    const searchedLyrics = $('.lyricSearchBar').val();
     $.ajax({
         "async": true,
         "crossDomain": true,
         "url": "https://shazam.p.rapidapi.com/search?term=" + searchedLyrics + "&locale=en-US&offset=0&limit=5",
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "198c5d9404msh8afbdbe95aa7f12p115299jsn1d3f7e17a3ea",
+            "x-rapidapi-key": "73a4e4991bmsh73de38b20c5a435p138c1fjsn33aed58d317e",
             "x-rapidapi-host": "shazam.p.rapidapi.com"
         }
     }).done(function (response) {
@@ -61,6 +70,7 @@ function handleShazam (event) {
     if ($.isEmptyObject(response)){
         console.log('oops!');
         modal.modal('open');
+        $(".loadBar").empty();
         artistInfoDiv.empty();
         lyricsDiv.empty();
         similarArtistsDiv.empty();
@@ -82,27 +92,25 @@ function handleShazam (event) {
     createArtistBio(artistObject);
     console.log(artistObject);
     handleTasteDive(modArtist, artistKey);
+    $(".loadBar").empty();
+  
+    // localStorage for artists,poster,lyrics
+    localStorage.setItem("artists",  artistName);
+    // localStorage.getItem("artists").append
+
+    localStorage.setItem("poster",songArt);
+    // localStorage.getItem("poster").append("");;
+    localStorage.setItem("lyrics",songLyrics);
+    // localStorage.getItem("lyrics").append("");;
+    
+
 
     })
-}
+    console.log(localStorage)
 
 
-function saveSearchedArtist(artist) {
-    savedArtists.push(artist);
-    window.localStorage.setItem('artists', JSON.stringify(savedArtists));
 }
-function savesongName (songName) {
-    savedsongName.push(songName);
-    window.localStorage.setItem('songName', JSON.stringify(savedsongName));
-}
-function savePoster (poster) {
-    savedPoster.push(poster);
-    window.localStorage.setItem('poster', JSON.stringify(savedPoster));
-}
-function savelyrics (lyrics) {
-    savedlyrics.push(lyrics);
-    window.localStorage.setItem('lyrics', JSON.stringify(savedlyrics));
-}
+
 
 
 function handleTasteDive (modArtist, artistKey) {
@@ -110,7 +118,7 @@ function handleTasteDive (modArtist, artistKey) {
     // if the shazam return has ft artist, split string and return first in returned array
     if (modArtist.includes("feat")){
         modArtist = modArtist.split("feat")[0];
-        console.log("this is modartist: ", modArtist);
+        console.log("this is modartist: ", modArtist)
     };
 
     $.ajax({
@@ -145,12 +153,16 @@ function handleTasteDive (modArtist, artistKey) {
                 var youtubeID = response.Similar.Results[i].yID;
                 var youtubeLink = "https://www.youtube.com/watch?v=" + youtubeID; // youtube link with response ID to form html link
                 var tasteDiveResults = (response.Similar.Results[i].Name); // name of similar artist
-                var hrefAttr = $('<a>').attr('href', youtubeLink).text(tasteDiveResults); // hyperlink
+                var hrefAttr = $("<a class = 'simArtistCSS'>").attr("href", youtubeLink).attr("target","_blank").text(tasteDiveResults); // hyperlink
                 var listAttr = $("<li>").append(hrefAttr); // create list element with hyperlink
                 $(".similarArtists").append(listAttr); // append the hyperlink to the ul 
 
             }
+        
         }
+        // localStorage for similar artists
+        localStorage.setItem("similar",tasteDiveResult[0].Name + tasteDiveResult[1].Name+ tasteDiveResult[2].Name);
+        // localStorage.getItem("similar").append ("");
     });
 }
 
@@ -163,7 +175,7 @@ function handleUndefined(artistKey){
         "url": "https://shazam.p.rapidapi.com/songs/list-recommendations?key=" + artistKey + "&locale=en-US",
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "198c5d9404msh8afbdbe95aa7f12p115299jsn1d3f7e17a3ea",
+            "x-rapidapi-key": "73a4e4991bmsh73de38b20c5a435p138c1fjsn33aed58d317e",
             "x-rapidapi-host": "shazam.p.rapidapi.com"
         }
     };
@@ -175,7 +187,9 @@ function handleUndefined(artistKey){
 
         // if the object is empty, post sorry
         if (isEmptyObject === true){
-            $(".similarArtists").append("Sorry, similar recommendations are not availible for this search.");
+            var sorryMessage = $("<li id='sorryMsg'>").append("Sorry, similar recommendations are not availible for this search.");
+            $(".similarArtists").append(sorryMessage);
+            
         } else { 
             for (var i = 0; i < totalReturnArtists; i++) {
 
@@ -225,6 +239,13 @@ function createArtistBio(artistObject) {
     }).appendTo(lyricsDiv);
 
 }
+
+
+
+
+
+
+
 
 
 // // const artistName = response.tracks.hits[0].track.subtitle;
