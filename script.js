@@ -1,6 +1,7 @@
 //JQuery Element Variables
 
 const lyricSearchBtn = $('.lyricSearchBtn');
+const inputSearch = $('.lyricSearchBar');
 const artistInfoDiv = $('.artistInfo');
 const lyricsDiv = $('.lyrics');
 const recommendedArtistsDiv = $('.recommendedArtists');
@@ -11,14 +12,43 @@ const similarArtistsDiv = $('.similarArtists');
 
 const modal = $('#modal1');
 
+// localstorage variables
+
+let savedArtists = []
+let savedsongName = []
+let savedPoster= []
+let savedlyrics = []
+
+// test to push
+
+
+
 
  
 $(document).ready(function() {
+    const allEntries = JSON.parse(window.localStorage.getItem("allEntries")) || [];
+    const map = {};
+    for (let i = 0; i < allEntries.length; i++) {
+        map[allEntries[i]] = null;
+    }
+    inputSearch.autocomplete({
+        data: map,
+    });
     modal.modal();
 });
-  
-lyricSearchBtn.click(handleShazam)
 
+inputSearch.on('change', handleShazam);
+
+
+
+
+function handleShazam (event) {
+    const searchedLyrics = event.target.value;
+
+    const allEntries = JSON.parse(window.localStorage.getItem("allEntries")) || [];
+    allEntries.unshift(searchedLyrics);
+    window.localStorage.setItem('allEntries', JSON.stringify(allEntries));
+}
 
 function handleShazam () {
     var loadBarDiv = $("<div class='progress progressModal'>");
