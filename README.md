@@ -10,7 +10,7 @@ https://inesr19.github.io/Project-1/
 * SO THAT I can expand my music library
 
 ## Website Demo
-![](Music-Spider.gif)
+![](assets/images/Music-Spider.gif)
 
 ## Acceptance Criteria
 * GIVEN a music dashboard with a form input
