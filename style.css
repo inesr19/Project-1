@@ -1,9 +1,10 @@
 body {
     padding: 10%;
     background-color: #7986cb;
-    background-image: url(./assets/images/pngegg3.png), url(./assets/images/pngegg2.png);
+    background-image: url(./assets/images/background2.png);
     background-repeat: no-repeat;
-    background-position: top left, 650px 385px;
+    background-position: top left -50px;
+    background-size: cover;
 }
 
 .header-container {
