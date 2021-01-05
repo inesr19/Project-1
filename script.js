@@ -22,8 +22,6 @@ let savedlyrics = []
 // test to push
 
 
-
-
  
 $(document).ready(function() {
     const allEntries = JSON.parse(window.localStorage.getItem("allEntries")) || [];
@@ -42,15 +40,24 @@ inputSearch.on('change', handleShazam);
 
 
 
-function handleShazam (event) {
+function handleEvent (event) {
     const searchedLyrics = event.target.value;
 
     const allEntries = JSON.parse(window.localStorage.getItem("allEntries")) || [];
     allEntries.unshift(searchedLyrics);
     window.localStorage.setItem('allEntries', JSON.stringify(allEntries));
+    
+    const map = {};
+    for (let i = 0; i < allEntries.length; i++) {
+        map[allEntries[i]] = null;
+    }
+    inputSearch.autocomplete({
+        data: map,
+    });
 }
 
-function handleShazam () {
+function handleShazam (event) {
+    handleEvent(event);
     var loadBarDiv = $("<div class='progress progressModal'>");
     var loadBarContent = $(loadBarDiv).append('<div class="indeterminate">');
     $(".loadBar").html(loadBarContent);
