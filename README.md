@@ -9,6 +9,8 @@ https://inesr19.github.io/Project-1/
 * I WANT to know information about a song based on lyrics
 * SO THAT I can expand my music library
 
+## Website Demo
+![](Music-Spider.gif)
 
 ## Acceptance Criteria
 * GIVEN a music dashboard with a form input
