@@ -1,5 +1,4 @@
 //JQuery Element Variables
-
 const lyricSearchBtn = $('.lyricSearchBtn');
 const inputSearch = $('.lyricSearchBar');
 const artistInfoDiv = $('.artistInfo');
@@ -8,21 +7,17 @@ const recommendedArtistsDiv = $('.recommendedArtists');
 const apiKey = "395206-Hayley-2B98EPSV";
 const queryURL = "https://tastedive.com/api/similar";
 const similarArtistsDiv = $('.similarArtists');
-//modal test vars
 
+//modal test vars
 const modal = $('#modal1');
 
 // localstorage variables
-
 let savedArtists = []
 let savedsongName = []
 let savedPoster= []
 let savedlyrics = []
 
 // test to push
-
-
- 
 $(document).ready(function() {
     const allEntries = JSON.parse(window.localStorage.getItem("allEntries")) || [];
     const map = {};
@@ -36,9 +31,6 @@ $(document).ready(function() {
 });
 
 inputSearch.on('change', handleShazam);
-
-
-
 
 function handleEvent (event) {
     const searchedLyrics = event.target.value;
@@ -97,25 +89,16 @@ function handleShazam (event) {
         key : artistKey
     }
     createArtistBio(artistObject);
-    console.log(artistObject);
     handleTasteDive(modArtist, artistKey);
     $(".loadBar").empty();
-  
-    // localStorage for artists,poster,lyrics
-    localStorage.setItem("artists",  artistName);
-    // localStorage.getItem("artists").append
-
-    localStorage.setItem("poster",songArt);
-    // localStorage.getItem("poster").append("");;
-    localStorage.setItem("lyrics",songLyrics);
-    // localStorage.getItem("lyrics").append("");;
     
-
-
+    localStorage.setItem("artists",  artistName);
+    
+    localStorage.setItem("poster",songArt);
+    
+    localStorage.setItem("lyrics",songLyrics);
+    
     })
-    console.log(localStorage)
-
-
 }
 
 
@@ -169,7 +152,6 @@ function handleTasteDive (modArtist, artistKey) {
         }
         // localStorage for similar artists
         localStorage.setItem("similar",tasteDiveResult[0].Name + tasteDiveResult[1].Name+ tasteDiveResult[2].Name);
-        // localStorage.getItem("similar").append ("");
     });
 }
 
@@ -246,25 +228,3 @@ function createArtistBio(artistObject) {
     }).appendTo(lyricsDiv);
 
 }
-
-
-
-
-
-
-
-
-
-// // const artistName = response.tracks.hits[0].track.subtitle;
-// const songName = response.tracks.hits[0].track.title
-// console.log("this is artist: ", artistName);
-// console.log("this is name: ", songName);
-
-//console.log("this is artist: ", artistName);
-//console.log("this is name: ", songName);
-
-//.fail(function(error){console.log('somethings wrong')})
-
-
-
-
